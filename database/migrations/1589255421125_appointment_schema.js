@@ -11,7 +11,6 @@ class AppointmentSchema extends Schema {
       table.string('student_enrollment', 7).references('enrollment').inTable('students')
       table.boolean('urgent').notNullable().defaultTo(false)
       table.datetime('date').notNullable()
-      table.unique(['patient_nip', 'student_enrollment'])
       table.timestamps()
     })
   }
