@@ -5,13 +5,10 @@ const Schema = use('Schema')
 
 class UserSchema extends Schema {
   up () {
-    this.create('patient', (table) => {
+    this.create('users', (table) => {
       table.increments()
-      table.string('username', 80).notNullable().unique()
-      table.int('phone').notNullable().unique()
-      table.int('cpf', 60).unique()
-      table.int('rg', 60).unique()
-      table.datetime('birthday').notNullable()
+      table.string('username', 30).notNullable().unique()
+      table.string('password').notNullable().unique()
       table.timestamps()
     })
   }
