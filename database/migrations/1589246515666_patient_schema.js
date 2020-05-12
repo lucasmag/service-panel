@@ -5,13 +5,13 @@ const Schema = use('Schema')
 
 class PatientSchema extends Schema {
   up () {
-    this.create('patient', (table) => {
+    this.create('patients', (table) => {
       table.increments('nip')
-      table.string('name', 80).notNullable()
+      table.string('name', 30).notNullable()
       table.string('cpf').unique().notNullable()
-      table.string('rg').unique().notNullable()
-      table.string('contato').notNullable()
-      table.date('birthday').notNullable()
+      table.string('rg').unique()
+      table.string('contact').notNullable()
+      table.date('birthday')
       table.timestamps()
     })
   }
