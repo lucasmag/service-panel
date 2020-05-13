@@ -7,8 +7,18 @@ class AppointmentProcedureSchema extends Schema {
   up () {
     this.create('appointment_procedures', (table) => {
       table.increments()
-      table.integer('appointment_id', 7).references('id').inTable('appointments')
-      table.integer('procedure_id', 7).references('id').inTable('procedures')
+      table
+        .integer('appointment_id', 7)
+        .references('id')
+        .inTable('appointments')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE')
+      table
+        .integer('procedure_id', 7)
+        .references('id')
+        .inTable('procedures')
+        .onUpdate('CASCADE')
+        .onDelete('CASCADE')
       table.timestamps()
     })
   }
