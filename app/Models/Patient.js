@@ -4,6 +4,9 @@
 const Model = use('Model')
 
 class Patient extends Model {
+  static get primaryKey () {
+    return 'nip'
+  }
 }
 
 module.exports = Patient
