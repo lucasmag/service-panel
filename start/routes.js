@@ -19,3 +19,7 @@ const Route = use('Route')
 Route.post('/register', 'AuthController.register')
 Route.post('/authenticate', 'AuthController.authenticate')
 Route.get('/dashboard', 'DashboardController.index').middleware(['auth'])
+
+Route.group(() => {
+  Route.resource('student', 'StudentController').apiOnly()
+}).middleware('auth');
