@@ -24,6 +24,9 @@ Route.post('/register', 'AuthController.register');
 Route.post('/authenticate', 'AuthController.authenticate');
 Route.get('/dashboard', 'DashboardController.index').middleware(['auth']);
 
+Route.group(() => {
+  Route.resource('student', 'StudentController').apiOnly()
+}).middleware('auth');
 
 // Routes patient.
 Route.group(() => {
@@ -32,4 +35,4 @@ Route.group(() => {
         Route.get('/patient/:nip', 'PatientController.show');
         Route.patch('/patient/:nip', 'PatientController.update');
         Route.delete('/patient/:nip', 'PatientController.destroy');
-    });
+});
