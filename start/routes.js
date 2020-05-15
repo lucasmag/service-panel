@@ -16,10 +16,23 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.post('/register', 'AuthController.register')
-Route.post('/authenticate', 'AuthController.authenticate')
-Route.get('/dashboard', 'DashboardController.index').middleware(['auth'])
+Route.get('/', ({response}) => {
+    return response.ok({message: 'all right!'});
+});
+
+Route.post('/register', 'AuthController.register');
+Route.post('/authenticate', 'AuthController.authenticate');
+Route.get('/dashboard', 'DashboardController.index').middleware(['auth']);
 
 Route.group(() => {
   Route.resource('student', 'StudentController').apiOnly()
 }).middleware('auth');
+
+// Routes patient.
+Route.group(() => {
+        Route.post('/patient', 'PatientController.store');
+        Route.get('/patient', 'PatientController.index');
+        Route.get('/patient/:nip', 'PatientController.show');
+        Route.patch('/patient/:nip', 'PatientController.update');
+        Route.delete('/patient/:nip', 'PatientController.destroy');
+});
