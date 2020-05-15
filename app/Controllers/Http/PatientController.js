@@ -17,7 +17,6 @@ class PatientController {
     return allPatients;
   }
 
-
   //Create/save a new patient.
   async store ({ request, response }) {
     const data = request.all();
@@ -29,12 +28,13 @@ class PatientController {
   }
 
   //Display a single patient
-  async show ({ params, request, response }) {
+  async show ({ params, response }) {
     const {nip} = params;
     const patient = await Patient.findOrFail(nip);
 
-    return patient;
+    return params.nip;
   }
+
 //Update patient details.
   async update ({ params, request, response }) {
     const {nip} = params;
@@ -47,8 +47,9 @@ class PatientController {
 
     return patient;
   }
+  
 //Delete a patient with id.
-  async destroy ({ params, request, response }) {
+  async destroy ({ params, response }) {
     const {nip} = params;
     const patient = await Patient.findOrFail(nip);
     
