@@ -4,9 +4,9 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-// const Appointment = use('App/Models/Appointment');
-// const Procedure = use('App/Models/Procedure');
 const AppointmentProcedure = use('App/Models/AppointmentProcedure');
+const Appointment = use('App/Models/Appointment');
+const Procedure = use('App/Models/Procedure');
 
 
 /**
@@ -30,7 +30,7 @@ class AppointmentProcedureController {
   
   async show ({ params, request, response }) {
     const {id} = params;
-    const apptsProcs = await AppointmentProcedure.findOrfail(id);
+    const apptsProcs = await AppointmentProcedure.findOrFail(id);
 
     return apptsProcs;
   }
