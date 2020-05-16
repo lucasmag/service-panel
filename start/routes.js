@@ -17,7 +17,7 @@
 const Route = use('Route')
 
 Route.get('/', ({response}) => {
-    return response.ok({message: 'all right!'});
+  return response.ok({message: 'all right!'});
 });
 
 Route.post('/register', 'AuthController.register');
@@ -28,9 +28,11 @@ Route.group(() => {
   Route.resource('student', 'StudentController').apiOnly()
 }).middleware('auth');
 
+Route.group(() => {
+  Route.resource('procedure', 'ProcedureController').apiOnly()
+}).middleware('auth');
+
 // Routes patient.
 Route.group(() => {
-  Route
-    .resource('patient', 'PatientController')
-    .apiOnly();
+  Route.resource('patient', 'PatientController').apiOnly();
 }).middleware('auth');
