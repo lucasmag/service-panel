@@ -30,9 +30,7 @@ Route.group(() => {
 
 // Routes patient.
 Route.group(() => {
-        Route.post('/patient', 'PatientController.store');
-        Route.get('/patient', 'PatientController.index');
-        Route.get('/patient/:nip', 'PatientController.show');
-        Route.patch('/patient/:nip', 'PatientController.update');
-        Route.delete('/patient/:nip', 'PatientController.destroy');
-});
+  Route
+    .resource('patient', 'PatientController')
+    .apiOnly();
+}).middleware('auth');
