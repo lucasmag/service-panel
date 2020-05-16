@@ -10,12 +10,14 @@ class AppointmentSchema extends Schema {
         .increments()
       table
         .integer('patient_nip')
+        .notNullable()
         .references('nip')
         .inTable('patients')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
       table.
         string('student_enrollment', 7)
+        .notNullable()
         .references('enrollment')
         .inTable('students')
         .onUpdate('CASCADE')
