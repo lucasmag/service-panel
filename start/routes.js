@@ -34,3 +34,10 @@ Route.group(() => {
     .resource('patient', 'PatientController')
     .apiOnly();
 }).middleware('auth');
+
+// Routes appointment procedure.
+Route.group(() => {
+  Route
+    .resource('appointment-procedure', 'AppointmentProcedureController')
+    .apiOnly();
+}).middleware('auth');
