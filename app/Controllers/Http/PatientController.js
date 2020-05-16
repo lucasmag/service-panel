@@ -22,8 +22,6 @@ class PatientController {
     const data = request.all();
     const patient = await Patient.create(data);
 
-    console.log(patient);
-
     return patient;
   }
 
@@ -37,8 +35,8 @@ class PatientController {
 //Update patient details.
   async update ({ params, request, response }) {
     const nip = params.id;
-    const patient = await Patient.findOrFail(nip);
     const data = request.all();
+    const patient = await Patient.findOrFail(nip);
 
     patient.merge(data);
 
@@ -51,8 +49,8 @@ class PatientController {
   async destroy ({ params, response }) {
     const nip = params.id;
     const patient = await Patient.findOrFail(nip);
-    
-    console.log(await patient.delete());
+
+    patient.delete();
 
     return response.ok({ message : `nip ${nip} deleted with sucess`});
   }
