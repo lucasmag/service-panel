@@ -10,12 +10,14 @@ class AppointmentProcedureSchema extends Schema {
         .increments()
       table
         .integer('appointment_id', 7)
+        .notNullable()
         .references('id')
         .inTable('appointments')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
       table
         .integer('procedure_id', 7)
+        .notNullable()
         .references('id')
         .inTable('procedures')
         .onUpdate('CASCADE')
