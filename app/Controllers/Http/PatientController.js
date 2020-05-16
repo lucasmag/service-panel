@@ -29,15 +29,14 @@ class PatientController {
 
   //Display a single patient
   async show ({ params, response }) {
-    const {nip} = params;
+    const nip = params.id;
     const patient = await Patient.findOrFail(nip);
-
-    return params.nip;
+    return patient;
   }
 
 //Update patient details.
   async update ({ params, request, response }) {
-    const {nip} = params;
+    const nip = params.id;
     const patient = await Patient.findOrFail(nip);
     const data = request.all();
 
@@ -50,7 +49,7 @@ class PatientController {
   
 //Delete a patient with id.
   async destroy ({ params, response }) {
-    const {nip} = params;
+    const nip = params.id;
     const patient = await Patient.findOrFail(nip);
     
     console.log(await patient.delete());
