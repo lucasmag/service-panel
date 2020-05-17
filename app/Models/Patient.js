@@ -1,12 +1,12 @@
-'use strict'
+'use strict';
 
 /** @type {typeof import('@adonisjs/lucid/src/Lucid/Model')} */
-const Model = use('Model')
+const Model = use('Model');
 
 class Patient extends Model {
-  static get primaryKey () {
-    return 'nip'
-  }
+    static get primaryKey() {
+        return 'nip';
+    }
 }
 
-module.exports = Patient
+module.exports = Patient;

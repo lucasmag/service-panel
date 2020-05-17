@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -10,50 +10,43 @@ const Patient = use('App/Models/Patient');
  * Resourceful controller for interacting with patients
  */
 class PatientController {
-  //Show a list of all the patients.
-  async index ({ response }) {
-    const allPatients = await Patient.all();
+    //Show a list of all the patients.
+    async index() {
+        return Patient.all();
+    }
 
-    return allPatients;
-  }
+    //Create/save a new patient.
+    async store({ request }) {
+        const data = request.all();
+        return Patient.create(data);
+    }
 
-  //Create/save a new patient.
-  async store ({ request, response }) {
-    const data = request.all();
-    const patient = await Patient.create(data);
+    //Display a single patient
+    async show({ params }) {
+        const nip = params.id;
+        return Patient.findOrFail(nip);
+    }
 
-    return patient;
-  }
+    //Update patient details.
+    async update({ params, request }) {
+        const nip = params.id;
+        const data = request.all();
+        const patient = await Patient.findOrFail(nip);
 
-  //Display a single patient
-  async show ({ params, response }) {
-    const nip = params.id;
-    const patient = await Patient.findOrFail(nip);
-    return patient;
-  }
+        patient.merge(data);
 
-//Update patient details.
-  async update ({ params, request, response }) {
-    const nip = params.id;
-    const data = request.all();
-    const patient = await Patient.findOrFail(nip);
+        patient.save();
 
-    patient.merge(data);
+        return patient;
+    }
 
-    patient.save();
+    //Delete a patient with id.
+    async destroy({ params }) {
+        const nip = params.id;
+        const patient = await Patient.findOrFail(nip);
 
-    return patient;
-  }
-  
-//Delete a patient with id.
-  async destroy ({ params, response }) {
-    const nip = params.id;
-    const patient = await Patient.findOrFail(nip);
-
-    patient.delete();
-
-    return response.ok({ message : `nip ${nip} deleted with sucess`});
-  }
+        patient.delete();
+    }
 }
 
-module.exports = PatientController
+module.exports = PatientController;

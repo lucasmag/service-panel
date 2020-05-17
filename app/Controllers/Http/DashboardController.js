@@ -1,10 +1,9 @@
-'use strict'
+'use strict';
 
 class DashboardController {
-
-  index(){
-    return 'Tela de dashboard'
-  }
+    index() {
+        return 'Tela de dashboard';
+    }
 }
 
-module.exports = DashboardController
+module.exports = DashboardController;

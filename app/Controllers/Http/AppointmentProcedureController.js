@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -8,55 +8,53 @@ const AppointmentProcedure = use('App/Models/AppointmentProcedure');
 const Appointment = use('App/Models/Appointment');
 const Procedure = use('App/Models/Procedure');
 
-
 /**
  * Resourceful controller for interacting with appointmentprocedures
  */
 class AppointmentProcedureController {
-  async index ({ request, response }) {
-    const apptsProcs = await AppointmentProcedure.all();
-    
-    return apptsProcs;
-  }
+    async index() {
+        return AppointmentProcedure.all();
+    }
 
-  
-  async store ({ request, response }) {
-    const data = request.all();
-    const apptsProcs = await AppointmentProcedure.create(data);
+    async store({ request }) {
+        const { appointmentId, procedureId } = request.all();
+        const appointment = await Appointment.findOrFail(appointmentId);
+        const procedure = await Procedure.findOrFail(procedureId);
 
-    return apptsProcs;
-  }
+        if (appointment && procedure) {
+            return AppointmentProcedure.create({
+                appointment_id: appointmentId,
+                procedure_id: procedureId,
+            });
+        }
 
-  
-  async show ({ params, request, response }) {
-    const {id} = params;
-    const apptsProcs = await AppointmentProcedure.findOrFail(id);
+        return response.noContent('Procedure or Appointment not found!');
+    }
 
-    return apptsProcs;
-  }
+    async show({ params }) {
+        return AppointmentProcedure.findOrFail(params.id);
+    }
 
-  
-  async update ({ params, request, response }) {
-    const {id} = params;
-    const data = request.all();
-    const apptsProcs = await AppointmentProcedure.findOrfail(id);
-    
-    apptsProcs.merge(data);
-    apptsProcs.save();
+    async update({ params, request }) {
+        const { id } = params;
+        const { appointmentId, procedureId } = request.all();
+        const apptsProcs = await AppointmentProcedure.findOrFail(id);
 
-    return apptsProcs;
-  }
+        apptsProcs.merge({
+            appointment_id: appointmentId,
+            procedure_id: procedureId,
+        });
+        apptsProcs.save();
 
-  
-  async destroy ({ params, request, response }) {
-    const {id} = params;
-    const apptsProcs = await AppointmentProcedure.delete(id);
+        return apptsProcs;
+    }
 
-    apptsProcs.delete();
+    async destroy({ params }) {
+        const { id } = params;
+        const apptsProcs = await AppointmentProcedure.findOrFail(id);
 
-    return response.ok({ message : `nip ${id} deleted with sucess`});
-
-  }
+        apptsProcs.delete();
+    }
 }
 
-module.exports = AppointmentProcedureController
+module.exports = AppointmentProcedureController;

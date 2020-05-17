@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 /*
 |--------------------------------------------------------------------------
@@ -14,30 +14,35 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
-const Route = use('Route')
+const Route = use('Route');
 
-Route.get('/', ({response}) => {
-    return response.ok({message: 'all right!'});
+Route.get('/', ({ response }) => {
+    return response.ok({ message: 'all right!' });
 });
 
-Route.post('/register', 'AuthController.register');
+Route.post('/register', 'AuthController.register').validator('StoreUser');
+
 Route.post('/authenticate', 'AuthController.authenticate');
 Route.get('/dashboard', 'DashboardController.index').middleware(['auth']);
 
 Route.group(() => {
-  Route.resource('student', 'StudentController').apiOnly()
+    Route.resource('student', 'StudentController').apiOnly();
+}).middleware('auth');
+
+Route.group(() => {
+    Route.resource('procedure', 'ProcedureController').apiOnly();
+}).middleware('auth');
+
+Route.group(() => {
+    Route.resource('appointment', 'AppointmentController').apiOnly();
 }).middleware('auth');
 
 // Routes patient.
 Route.group(() => {
-  Route
-    .resource('patient', 'PatientController')
-    .apiOnly();
+    Route.resource('patient', 'PatientController').apiOnly();
 }).middleware('auth');
 
 // Routes appointment procedure.
 Route.group(() => {
-  Route
-    .resource('appointment-procedure', 'AppointmentProcedureController')
-    .apiOnly();
+    Route.resource('appointment-procedure', 'AppointmentProcedureController').apiOnly();
 }).middleware('auth');
