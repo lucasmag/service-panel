@@ -22,8 +22,8 @@ class AppointmentProcedureSchema extends Schema {
         .inTable('procedures')
         .onUpdate('CASCADE')
         .onDelete('CASCADE')
-      table
-        .timestamps()
+      table.unique(['appointment_id', 'procedure_id'])
+      table.timestamps()
     })
   }
 

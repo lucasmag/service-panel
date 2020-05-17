@@ -26,11 +26,9 @@ class AppointmentSchema extends Schema {
         .boolean('urgent')
         .notNullable()
         .defaultTo(false)
-      table
-        .datetime('date')
-        .notNullable()
-      table
-        .timestamps()
+      table.datetime('date', { useTz: false }).notNullable()
+      table.unique(['patient_nip', 'student_enrollment', 'date']);
+      table.timestamps()
     })
   }
 
