@@ -20,7 +20,8 @@ Route.get('/', ({ response }) => {
     return response.ok({ message: 'all right!' });
 });
 
-Route.post('/register', 'AuthController.register');
+Route.post('/register', 'AuthController.register').validator('StoreUser');
+
 Route.post('/authenticate', 'AuthController.authenticate');
 Route.get('/dashboard', 'DashboardController.index').middleware(['auth']);
 
