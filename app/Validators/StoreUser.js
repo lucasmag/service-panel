@@ -20,8 +20,7 @@ class StoreUser {
             'username.min': 'Username must have at least 4 characters',
             'username.max': 'Username cannot have more than 10 characters',
             'password.max': 'Password cannot have more than 15 characters',
-            'username.alphaNumeric':
-                'Username only accept lowercase characters and numbers',
+            'username.alphaNumeric': 'Username only accept lowercase characters and numbers',
         };
     }
 }

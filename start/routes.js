@@ -44,8 +44,5 @@ Route.group(() => {
 
 // Routes appointment procedure.
 Route.group(() => {
-    Route.resource(
-        'appointment-procedure',
-        'AppointmentProcedureController'
-    ).apiOnly();
+    Route.resource('appointment-procedure', 'AppointmentProcedureController').apiOnly();
 }).middleware('auth');
