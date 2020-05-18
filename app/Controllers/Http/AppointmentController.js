@@ -17,8 +17,8 @@ class AppointmentController {
         return Appointment.create({
             patient_nip: patientNip,
             student_enrollment: studentEnrollment,
-            date: date,
-            urgent: urgent,
+            date,
+            urgent,
         });
     }
 

@@ -21,6 +21,7 @@ class AppointmentProcedureController {
         const appointment = await Appointment.findOrFail(appointmentId);
         const procedure = await Procedure.findOrFail(procedureId);
 
+
         if (appointment && procedure) {
             return AppointmentProcedure.create({
                 appointment_id: appointmentId,
