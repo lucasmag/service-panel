@@ -17,6 +17,7 @@ const providers = [
     '@adonisjs/framework/providers/AppProvider',
     '@adonisjs/validator/providers/ValidatorProvider',
     '@adonisjs/bodyparser/providers/BodyParserProvider',
+    '@adonisjs/vow/providers/VowProvider',
 ];
 
 /*

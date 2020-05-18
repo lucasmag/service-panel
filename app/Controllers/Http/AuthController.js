@@ -5,7 +5,7 @@ const User = use('App/Models/User');
 class AuthController {
     async register({ request }) {
         const data = request.all();
-
+        // data = Object{name, username and password}
         return User.create(data);
     }
 
